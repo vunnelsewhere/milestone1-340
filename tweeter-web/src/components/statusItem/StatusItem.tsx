@@ -1,64 +1,27 @@
-// Import links
+import { Status } from "tweeter-shared";
 import { Link } from "react-router-dom";
-import Post from "./Post";
-import { AuthToken, FakeData, Status, User } from "tweeter-shared";
+import Post from "../statusItem/Post";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
+import useNavigateToUser from "../userInfo/userNavigationHook";
 
-/* Pass item to the component by creating a prop (property) for it */
+
 interface Props {
-  status: Status; // item.property
+  value: Status;
 }
 
-/* create a function to copy the duplicate inside */
-const StatusItem = ({ status }: Props) => {
-  // extract status property directly from the props
-  // pass by property
+const StatusItem = (props: Props) => {
+  const { navigateToUser } = useNavigateToUser();
+  const { displayErrorMessage } = useToastListener();
+  const { setDisplayedUser, currentUser, authToken } = useUserInfo();
 
-  const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
-    const { displayErrorMessage } = useToastListener();
-    const { setDisplayedUser, currentUser, authToken } = useUserInfo();
-
-    event.preventDefault();
-
-    try {
-      let alias = extractAlias(event.target.toString());
-
-      let user = await getUser(authToken!, alias);
-
-      if (!!user) {
-        if (currentUser!.equals(user)) {
-          setDisplayedUser(currentUser!);
-        } else {
-          setDisplayedUser(user);
-        }
-      }
-    } catch (error) {
-      displayErrorMessage(`Failed to get user because of exception: ${error}`);
-    }
-  };
-
-  const extractAlias = (value: string): string => {
-    let index = value.indexOf("@");
-    return value.substring(index);
-  };
-
-  const getUser = async (
-    authToken: AuthToken,
-    alias: string
-  ): Promise<User | null> => {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.findUserByAlias(alias);
-  };
-
-  /* copy div hack: collapse the div, find the opening and closing tag */
   return (
     <div className="col bg-light mx-0 px-0">
       <div className="container px-0">
         <div className="row mx-0 px-0">
           <div className="col-auto p-3">
             <img
-              src={status.user.imageUrl}
+              src={props.value.user.imageUrl}
               className="img-fluid"
               width="80"
               alt="Posting user"
@@ -67,19 +30,27 @@ const StatusItem = ({ status }: Props) => {
           <div className="col">
             <h2>
               <b>
-                {status.user.firstName} {status.user.lastName}
+                {props.value.user.firstName} {props.value.user.lastName}
               </b>{" "}
               -{" "}
               <Link
-                to={status.user.alias}
-                onClick={(event) => navigateToUser(event)}
+                to={props.value.user.alias}
+                onClick={(event) =>
+                  navigateToUser(
+                    event,
+                    setDisplayedUser,
+                    currentUser,
+                    authToken,
+                    displayErrorMessage
+                  )
+                }
               >
-                {status.user.alias}
+                {props.value.user.alias}
               </Link>
             </h2>
-            {status.formattedDate}
+            {props.value.formattedDate}
             <br />
-            <Post status={status} />
+            <Post status={props.value} />
           </div>
         </div>
       </div>
@@ -88,4 +59,3 @@ const StatusItem = ({ status }: Props) => {
 };
 
 export default StatusItem;
-

@@ -10,9 +10,6 @@ import Login from "./components/authentication/login/Login";
 import Register from "./components/authentication/register/Register";
 import MainLayout from "./components/mainLayout/MainLayout";
 import Toaster from "./components/toaster/Toaster";
-
-//import FeedScroller from "./components/mainLayout/FeedScroller";
-//import StoryScroller from "./components/mainLayout/StoryScroller";
 import { AuthToken, User, FakeData, Status } from "tweeter-shared";
 import UserItemScroller from "./components/mainLayout/UserItemScroller";
 import StatusItemScroller from "./components/mainLayout/StatusItemScroller";
@@ -60,7 +57,7 @@ const AuthenticatedRoutes = () => {
     return FakeData.instance.getPageOfUsers(lastItem, pageSize, user);
   };
 
-  const loadMoreFeedItems = async (
+  const loadMoreStoryItems = async (
     authToken: AuthToken,
     user: User,
     pageSize: number,
@@ -70,7 +67,7 @@ const AuthenticatedRoutes = () => {
     return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
   };
 
-  const loadMoreStoryItems = async (
+  const loadMoreFeedItems = async (
     authToken: AuthToken,
     user: User,
     pageSize: number,
