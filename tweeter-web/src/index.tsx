@@ -12,9 +12,11 @@ library.add(fab);
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
+// App = parent of all the components
+// providers
 root.render(
   <React.StrictMode>
-    <UserInfoProvider>
+    <UserInfoProvider> 
       <ToastProvider>
         <App />
       </ToastProvider>

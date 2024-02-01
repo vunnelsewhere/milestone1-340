@@ -1,3 +1,6 @@
+/** Toast provider provides an interface that defines a bunch of 
+ * different functions for displaying and deleting toast
+ */
 import { Context, createContext, useState } from "react";
 import {
   Toast,
@@ -62,6 +65,8 @@ const defaultToastInfo: ToastInfo = {
   deleteLastWarningToast: () => null,
 };
 
+// This context gets used in all the components
+// create a hook put the functionality in there and then end up integrating it
 export const ToastInfoContext: Context<ToastInfo> =
   createContext<ToastInfo>(defaultToastInfo);
 

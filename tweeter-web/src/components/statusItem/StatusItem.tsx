@@ -2,9 +2,8 @@
 import { Link } from "react-router-dom";
 import Post from "./Post";
 import { AuthToken, FakeData, Status, User } from "tweeter-shared";
-import { useContext } from "react";
-import { UserInfoContext } from "../userInfo/UserInfoProvider";
 import useToastListener from "../toaster/ToastListenerHook";
+import useUserInfo from "../userInfo/UserInfoHook";
 
 /* Pass item to the component by creating a prop (property) for it */
 interface Props {
@@ -18,8 +17,7 @@ const StatusItem = ({ status }: Props) => {
 
   const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
     const { displayErrorMessage } = useToastListener();
-    const { setDisplayedUser, currentUser, authToken } =
-      useContext(UserInfoContext);
+    const { setDisplayedUser, currentUser, authToken } = useUserInfo();
 
     event.preventDefault();
 
@@ -90,3 +88,4 @@ const StatusItem = ({ status }: Props) => {
 };
 
 export default StatusItem;
+
