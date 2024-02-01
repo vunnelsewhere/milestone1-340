@@ -11,13 +11,13 @@ import StatusItem from "../statusItem/StatusItem";
 export const PAGE_SIZE = 10;
 
 interface Props {
-    loadItems: (
-        authToken: AuthToken,
-        user: User,
-        pageSize: number,
-        lastItem: Status | null
-      )=> Promise<[Status[], boolean]>; //  => means return this for now
-    itemDescription: string;
+  loadItems: (
+    authToken: AuthToken,
+    user: User,
+    pageSize: number,
+    lastItem: Status | null
+  ) => Promise<[Status[], boolean]>; //  => means return this for now
+  itemDescription: string;
 }
 
 const StatusItemScroller = (props: Props) => {
@@ -67,8 +67,6 @@ const StatusItemScroller = (props: Props) => {
   };
 
   /* DELETE THIS FUNCTION */
-
-
 
   const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
     event.preventDefault();
@@ -123,7 +121,6 @@ const StatusItemScroller = (props: Props) => {
       </InfiniteScroll>
     </div>
   );
-
 };
 
 export default StatusItemScroller;
