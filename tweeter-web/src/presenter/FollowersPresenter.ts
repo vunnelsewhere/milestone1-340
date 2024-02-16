@@ -11,12 +11,12 @@ export class FollowersPresenter extends UserItemPresenter {
     super(view); // revise this
   }
 
-  public async loadMoreItems(authToken: AuthToken, displayedUser: User) {
+  public async loadMoreItems(authToken: AuthToken, user: User) {
     try {
       if (this.hasMoreItems) {
         let [newItems, hasMore] = await this.service.loadMoreFollowers(
           authToken,
-          displayedUser,
+          user,
           PAGE_SIZE,
           this.lastItem
         );
@@ -32,4 +32,3 @@ export class FollowersPresenter extends UserItemPresenter {
     }
   }
 }
-

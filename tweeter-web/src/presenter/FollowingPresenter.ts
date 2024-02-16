@@ -4,23 +4,19 @@ import { UserItemPresenter, UserItemView } from "./UserItemPresenter";
 
 export const PAGE_SIZE = 10;
 
-export class FollowingPresenter extends UserItemPresenter{
-
+export class FollowingPresenter extends UserItemPresenter {
   private lastItem: User | null = null;
 
   public constructor(view: UserItemView) {
     super(view); // revise this
-   
   }
 
-  
-
-  public async loadMoreItems(authToken: AuthToken, displayedUser: User) {
+  public async loadMoreItems(authToken: AuthToken, user: User) {
     try {
       if (this.hasMoreItems) {
         let [newItems, hasMore] = await this.service.loadMoreFollowees(
           authToken,
-          displayedUser,
+          user,
           PAGE_SIZE,
           this.lastItem
         );
