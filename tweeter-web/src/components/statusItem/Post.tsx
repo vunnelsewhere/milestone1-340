@@ -1,61 +1,34 @@
-import { AuthToken, FakeData, Status, User, Type } from "tweeter-shared";
+import { Status, Type } from "tweeter-shared";
 import { Link } from "react-router-dom";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
+import useNavigateToUser from "../userInfo/userNavigationHook";
 
 interface Props {
   status: Status;
 }
 
 const Post = (props: Props) => {
-  const { setDisplayedUser, currentUser, authToken } =
-  useUserInfo();
+  const { navigateToUser } = useNavigateToUser();
   const { displayErrorMessage } = useToastListener();
+  const { setDisplayedUser, currentUser, authToken } = useUserInfo();
 
-  const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
-    event.preventDefault();
-
-    try {
-      let alias = extractAlias(event.target.toString());
-
-      let user = await getUser(authToken!, alias);
-
-      if (!!user) {
-        if (currentUser!.equals(user)) {
-          setDisplayedUser(currentUser!);
-        } else {
-          setDisplayedUser(user);
-        }
-      }
-    } catch (error) {
-      displayErrorMessage(`Failed to get user because of exception: ${error}`);
-    }
-  };
-
-  const extractAlias = (value: string): string => {
-    let index = value.indexOf("@");
-    return value.substring(index);
-  };
-
-  const getUser = async (
-    authToken: AuthToken,
-    alias: string
-  ): Promise<User | null> => {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.findUserByAlias(alias);
-  };
-
-  // components have to be arranged in a tree, <> one root
-  // when this code is compiled or generated into html, it will know not to put anything for this
-  // it will in whatever parent placed in the post component
   return (
-    <> 
+    <>
       {props.status.segments.map((segment, index) =>
         segment.type === Type.alias ? (
           <Link
             key={index}
             to={segment.text}
-            onClick={(event) => navigateToUser(event)}
+            onClick={(event) =>
+              navigateToUser(
+                event,
+                setDisplayedUser,
+                currentUser,
+                authToken,
+                displayErrorMessage
+              )
+            }
           >
             {segment.text}
           </Link>

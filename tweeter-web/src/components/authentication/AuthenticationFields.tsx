@@ -13,7 +13,7 @@ const AuthenticationFields = ({ setAlias, setPassword }: Props) => {
 
   return (
     // JSX expressions must have one parent element.
-    <div>
+    <>
       <div className="form-floating">
         <input
           type="text"
@@ -35,7 +35,7 @@ const AuthenticationFields = ({ setAlias, setPassword }: Props) => {
         />
         <label htmlFor="passwordInput">Password</label>
       </div>
-    </div>
+    </>
   );
 };
 
