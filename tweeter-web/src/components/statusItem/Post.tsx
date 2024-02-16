@@ -9,9 +9,13 @@ interface Props {
 }
 
 const Post = (props: Props) => {
-  const { navigateToUser } = useNavigateToUser();
   const { displayErrorMessage } = useToastListener();
   const { setDisplayedUser, currentUser, authToken } = useUserInfo();
+  // comes after Block-scoped variable 'setDisplayedUser' used before its declaration.ts(2448)
+  const { navigateToUser } = useNavigateToUser(
+    setDisplayedUser,
+    displayErrorMessage
+  ); // added prarmeter
 
   return (
     <>
@@ -20,15 +24,7 @@ const Post = (props: Props) => {
           <Link
             key={index}
             to={segment.text}
-            onClick={(event) =>
-              navigateToUser(
-                event,
-                setDisplayedUser,
-                currentUser,
-                authToken,
-                displayErrorMessage
-              )
-            }
+            onClick={(event) => navigateToUser(event, currentUser, authToken)}
           >
             {segment.text}
           </Link>
@@ -52,3 +48,15 @@ const Post = (props: Props) => {
 };
 
 export default Post;
+
+/*
+onClick={(event) =>
+              navigateToUser(
+                event,
+                setDisplayedUser,
+                currentUser,
+                authToken,
+                displayErrorMessage
+              )
+            }
+*/

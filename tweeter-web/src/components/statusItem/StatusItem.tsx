@@ -5,15 +5,18 @@ import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
 import useNavigateToUser from "../userInfo/userNavigationHook";
 
-
 interface Props {
   value: Status;
 }
 
 const StatusItem = (props: Props) => {
-  const { navigateToUser } = useNavigateToUser();
   const { displayErrorMessage } = useToastListener();
   const { setDisplayedUser, currentUser, authToken } = useUserInfo();
+  // comes after Block-scoped variable 'setDisplayedUser' used before its declaration.ts(2448)
+  const { navigateToUser } = useNavigateToUser(
+    setDisplayedUser,
+    displayErrorMessage
+  ); // added prarmeter
 
   return (
     <div className="col bg-light mx-0 px-0">
@@ -36,13 +39,7 @@ const StatusItem = (props: Props) => {
               <Link
                 to={props.value.user.alias}
                 onClick={(event) =>
-                  navigateToUser(
-                    event,
-                    setDisplayedUser,
-                    currentUser,
-                    authToken,
-                    displayErrorMessage
-                  )
+                  navigateToUser(event, currentUser, authToken)
                 }
               >
                 {props.value.user.alias}
