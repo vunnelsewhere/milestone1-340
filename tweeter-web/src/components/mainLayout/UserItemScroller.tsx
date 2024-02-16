@@ -5,7 +5,6 @@ import UserItem from "../userItem/UserItem";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
 
-import { PAGE_SIZE } from "./StatusItemScroller";
 import {
   UserItemPresenter,
   UserItemView,
