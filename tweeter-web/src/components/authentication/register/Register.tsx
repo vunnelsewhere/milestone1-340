@@ -11,7 +11,7 @@ import useUserInfo from "../../userInfo/UserInfoHook";
 import {
   RegisterView,
   RegisterPresenter,
-} from "../../../presenter/RegisterPresenter";
+} from "../../../presenter/authentication/RegisterPresenter";
 
 interface Props {
   // 1st

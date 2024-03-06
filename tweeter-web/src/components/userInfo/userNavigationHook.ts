@@ -2,7 +2,7 @@ import { AuthToken, User } from "tweeter-shared";
 import {
   UserNavigationPresenter,
   UserNavigationView,
-} from "../../presenter/UserNavigationPresenter";
+} from "../../presenter/user/UserNavigationPresenter";
 
 interface UserNavigation {
   navigateToUser: (

@@ -10,18 +10,24 @@ import Login from "./components/authentication/login/Login";
 import Register from "./components/authentication/register/Register";
 import MainLayout from "./components/mainLayout/MainLayout";
 import Toaster from "./components/toaster/Toaster";
-import { AuthToken, User, FakeData, Status } from "tweeter-shared";
-import UserItemScroller from "./components/mainLayout/UserItemScroller";
-import StatusItemScroller from "./components/mainLayout/StatusItemScroller";
 import useUserInfo from "./components/userInfo/UserInfoHook";
-import { FollowingPresenter } from "./presenter/FollowingPresenter";
-import { UserItemView } from "./presenter/UserItemPresenter";
-import { FollowersPresenter } from "./presenter/FollowersPresenter";
-import { StatusItemView } from "./presenter/StatusItemPresenter";
-import { FeedPresenter } from "./presenter/FeedPresenter";
-import { StoryPresenter } from "./presenter/StoryPresenter";
-import { LoginPresenter, LoginView } from "./presenter/LoginPresenter";
-import { RegisterView, RegisterPresenter } from "./presenter/RegisterPresenter";
+import { FollowingPresenter } from "./presenter/follow/FollowingPresenter";
+import { FollowersPresenter } from "./presenter/follow/FollowersPresenter";
+import { FeedPresenter } from "./presenter/status/FeedPresenter";
+import { StoryPresenter } from "./presenter/status/StoryPresenter";
+import { LoginPresenter } from "./presenter/authentication/LoginPresenter";
+import {
+  RegisterView,
+  RegisterPresenter,
+} from "./presenter/authentication/RegisterPresenter";
+import { Status, User } from "tweeter-shared";
+import { ItemScroller } from "./components/mainLayout/ItemScroller";
+import StatusItem from "./components/statusItem/StatusItem";
+import UserItem from "./components/userItem/UserItem";
+import { FollowService } from "./model/service/FollowService";
+import { StatusService } from "./model/service/StatusService";
+import { PagedItemView } from "./presenter/PagedItemPresenter";
+import { AuthenticationView } from "./presenter/AuthenticationPresenter";
 
 const App = () => {
   const { currentUser, authToken } = useUserInfo();
@@ -53,40 +59,48 @@ const AuthenticatedRoutes = () => {
         <Route
           path="feed"
           element={
-            <StatusItemScroller
-              presenterGenerator={(view: StatusItemView) =>
+            <ItemScroller<Status, StatusService>
+              presenterGenerator={(view: PagedItemView<Status>) =>
                 new FeedPresenter(view)
               }
+              ItemComponent={StatusItem}
+              key={"feed"}
             />
           }
         />
         <Route
           path="story"
           element={
-            <StatusItemScroller
-              presenterGenerator={(view: StatusItemView) =>
+            <ItemScroller<Status, StatusService>
+              presenterGenerator={(view: PagedItemView<Status>) =>
                 new StoryPresenter(view)
               }
+              ItemComponent={StatusItem}
+              key={"story"}
             />
           }
         />
         <Route
           path="following"
           element={
-            <UserItemScroller
-              presenterGenerator={(view: UserItemView) =>
+            <ItemScroller<User, FollowService>
+              presenterGenerator={(view: PagedItemView<User>) =>
                 new FollowingPresenter(view)
               }
+              ItemComponent={UserItem}
+              key={"following"}
             />
           }
         />
         <Route
           path="followers"
           element={
-            <UserItemScroller
-              presenterGenerator={(view: UserItemView) =>
+            <ItemScroller<User, FollowService>
+              presenterGenerator={(view: PagedItemView<User>) =>
                 new FollowersPresenter(view)
               }
+              ItemComponent={UserItem}
+              key={"followers"}
             />
           }
         />
@@ -106,7 +120,9 @@ const UnauthenticatedRoutes = () => {
         path="/login"
         element={
           <Login
-            presenterGenerator={(view: LoginView) => new LoginPresenter(view)}
+            presenterGenerator={(view: AuthenticationView) =>
+              new LoginPresenter(view)
+            }
           />
         }
       />
@@ -125,7 +141,9 @@ const UnauthenticatedRoutes = () => {
         element={
           <Login
             originalUrl={location.pathname}
-            presenterGenerator={(view: LoginView) => new LoginPresenter(view)}
+            presenterGenerator={(view: AuthenticationView) =>
+              new LoginPresenter(view)
+            }
           />
         }
       />

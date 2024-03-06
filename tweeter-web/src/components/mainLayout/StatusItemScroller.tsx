@@ -7,7 +7,7 @@ import useUserInfo from "../userInfo/UserInfoHook";
 import {
   StatusItemPresenter,
   StatusItemView,
-} from "../../presenter/StatusItemPresenter";
+} from "../../presenter/status/StatusItemPresenter";
 
 export const PAGE_SIZE = 10;
 
