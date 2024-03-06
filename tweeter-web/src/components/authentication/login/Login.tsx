@@ -12,11 +12,12 @@ import {
   LoginPresenter,
   // LoginView,
 } from "../../../presenter/authentication/LoginPresenter";
-import { AuthenticationView } from "../../../presenter/AuthenticationPresenter";
+import { AuthenticationView } from "../../../presenter/AuthenticationPresenter"; 
 
 interface Props {
   originalUrl?: string;
   presenterGenerator: (view: AuthenticationView) => LoginPresenter; // 1st
+  presenter?: LoginPresenter; // *1
 }
 
 const Login = (props: Props) => {
@@ -42,7 +43,9 @@ const Login = (props: Props) => {
     navigate: (url: string) => navigate(url),
   };
 
-  const [presenter] = useState(props.presenterGenerator(listener)); // new login presenter
+  const [presenter] = useState(
+    props.presenter ?? props.presenterGenerator(listener)
+  );
 
   const doLogin = async () => {
     presenter.doLogin(
@@ -83,3 +86,7 @@ const Login = (props: Props) => {
 };
 
 export default Login;
+
+
+/**Type '{ originalUrl: string; presenterGenerator: (view: AuthenticationView) => LoginPresenter; presenter: LoginPresenter; }' is not assignable to type 'IntrinsicAttributes & Props'.
+  Property 'presenter' does not exist on type 'IntrinsicAttributes & Props'.ts(2322) */

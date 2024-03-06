@@ -20,6 +20,7 @@ const AuthenticationFields = ({ setAlias, setPassword }: Props) => {
           className="form-control"
           size={50}
           id="aliasInput"
+          aria-label="alias"
           placeholder="name@example.com"
           onChange={(event) => setAlias(event.target.value)}
         />
@@ -30,6 +31,7 @@ const AuthenticationFields = ({ setAlias, setPassword }: Props) => {
           type="password"
           className="form-control bottom"
           id="passwordInput"
+          aria-label="password"
           placeholder="Password"
           onChange={(event) => setPassword(event.target.value)}
         />
