@@ -14,7 +14,7 @@ import {
 import {
   LogoutPresenter,
   LogoutView,
-} from "../../presenter/authentication/LogoutPresenter";
+} from "../../presenter/authentication/AppNavbarPresenter";
 
 const MainLayout = () => {
   return (

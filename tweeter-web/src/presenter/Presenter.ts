@@ -22,13 +22,17 @@ export class Presenter {
   protected async doFailureReportingOperation(
     operation: () => Promise<void>,
     operationDescription: string
-  ): Promise<void> {
+  ) {
     try {
       await operation();
     } catch (error) {
       this.view.displayErrorMessage(
-        `Failed to ${operationDescription} because of exception: ${error}`
+        `Failed to ${operationDescription} because of exception: ${
+          (error as Error).message
+        }`
       );
     }
   }
 }
+
+// `Failed to ${operationDescription} because of exception: ${error}` // not called with the string we expected in the video

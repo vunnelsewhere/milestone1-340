@@ -6,13 +6,13 @@ import { AuthToken } from "tweeter-shared";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
 import {
-  LogoutPresenter,
-  LogoutView,
-} from "../../presenter/authentication/LogoutPresenter";
+  AppNavbarPresenter,
+  AppNavbarView,
+} from "../../presenter/authentication/AppNavbarPresenter";
 import { useState } from "react";
 
 interface Props {
-  presenterGenerator: (view: LogoutView) => LogoutPresenter;
+  presenterGenerator: (view: AppNavbarView) => AppNavbarPresenter;
 }
 
 const AppNavbar = (props: Props) => {
@@ -21,11 +21,16 @@ const AppNavbar = (props: Props) => {
   const { displayInfoMessage, displayErrorMessage, clearLastInfoMessage } =
     useToastListener();
 
-  const listener: LogoutView = {
+  let pathname: string = location.pathname;
+
+  const listener: AppNavbarView = {
     displayInfoMessage: displayInfoMessage,
     clearLastInfoMessage: clearLastInfoMessage,
     clearUserInfo: clearUserInfo,
     displayErrorMessage: displayErrorMessage,
+    navigateToLogin: () => {
+      pathname = location.pathname;
+    },
   };
 
   const [presenter] = useState(props.presenterGenerator(listener));
@@ -73,7 +78,7 @@ const AppNavbar = (props: Props) => {
               <NavLink to="/followers">Followers</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink id="logout" onClick={logOut} to={location.pathname}>
+              <NavLink id="logout" onClick={logOut} to={pathname}>
                 Logout
               </NavLink>
             </Nav.Item>
