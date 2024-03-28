@@ -22,3 +22,6 @@ export const handler = async (
   }
   return response;
 };
+
+/** We need lambda function for every endpoint */
+// question at this point: UserService class in here vs the one in frontend

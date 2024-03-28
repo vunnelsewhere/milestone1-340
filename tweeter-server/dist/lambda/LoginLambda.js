@@ -27,3 +27,5 @@ const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     return response;
 });
 exports.handler = handler;
+/** We need lambda function for every endpoint */
+// question at this point: UserService class in here vs the one in frontend

@@ -22,9 +22,10 @@ import {
   PostStatusRequest,
 } from "tweeter-shared";
 
+
 export class ServerFacade {
   private SERVER_URL =
-    "https://bm2uigckx7.execute-api.us-east-2.amazonaws.com/dev";
+    "https://cbcwdfulah.execute-api.us-east-2.amazonaws.com/dev"; // API Gateway -> Stages (UPDATED!!)
 
   private clientCommunicator = new ClientCommunicator(this.SERVER_URL);
 
@@ -40,7 +41,7 @@ export class ServerFacade {
 
   // Login
   async login(request: LoginRequest): Promise<AuthenticateResponse> {
-    const endpoint = "/service/login";
+    const endpoint = "/login";
     const response: JSON = await this.clientCommunicator.doPost<LoginRequest>(
       request,
       endpoint

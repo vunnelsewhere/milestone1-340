@@ -95,3 +95,5 @@ export class UserService {
     return [followersCount, followeesCount];
   }
 }
+
+// only the front-end one call the web api, this one calls fake data
