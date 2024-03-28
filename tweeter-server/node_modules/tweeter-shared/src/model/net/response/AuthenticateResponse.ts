@@ -35,6 +35,7 @@ export class AuthenticateResponse extends TweeterResponse {
       json as unknown as AuthenticateResponseJson;
     const deserializedUser = User.fromJson(JSON.stringify(jsonObject._user));
 
+    // check user
     if (deserializedUser === null) {
       throw new Error(
         "AuthenticateResponse, could not deserialize user with json:\n" +
@@ -42,6 +43,7 @@ export class AuthenticateResponse extends TweeterResponse {
       );
     }
 
+    // check token
     const deserializedToken = AuthToken.fromJson(
       JSON.stringify(jsonObject._token)
     );

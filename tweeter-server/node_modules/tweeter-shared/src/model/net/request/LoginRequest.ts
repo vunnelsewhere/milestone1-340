@@ -8,3 +8,5 @@ export class LoginRequest extends TweeterRequest {
     this.password = password;
   }
 }
+
+/**Reference the UserService class to see what's needed for the request */

@@ -1,6 +1,5 @@
 import { AuthToken } from "../../domain/AuthToken";
 
-
 export class TweeterRequest {
   public alias: string;
   public authtoken: AuthToken | undefined;
@@ -10,3 +9,5 @@ export class TweeterRequest {
     this.authtoken = authtoken;
   }
 }
+
+/**tutorial video */
