@@ -96,7 +96,8 @@ describe("Post Status", () => {
   });
 });
 
-const renderPostStatusComp = (presenter?: PostStatusPresenter) => { // no need memoryrouter
+const renderPostStatusComp = (presenter?: PostStatusPresenter) => {
+  // no need memoryrouter
   return render(
     <MemoryRouter>
       {!!presenter ? (
