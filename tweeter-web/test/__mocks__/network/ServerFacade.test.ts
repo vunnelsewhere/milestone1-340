@@ -9,12 +9,6 @@ import "isomorphic-fetch";
 import { ServerFacade } from "../../../src/network/ServerFacade";
 
 describe("ServerFacade", () => {
-  //   let server: ServerFacade;
-
-  //   beforeEach(() => {
-  //     server = new ServerFacade();
-  //   });
-
   it("lets a user register", async () => {
     const request = new RegisterRequest("a", "a", "a", "a", "url");
     const server = new ServerFacade();
@@ -25,6 +19,7 @@ describe("ServerFacade", () => {
     expect(response.success).toBe(true);
     expect(response.token).toBeTruthy();
     expect(response.user).toBeTruthy();
+    // compare the person i got back
   });
 
   it("gets a user's followers", async () => {
