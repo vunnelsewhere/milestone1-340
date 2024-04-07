@@ -14,12 +14,11 @@ const root = createRoot(container);
 
 // App = parent of all the components
 // providers
+// https://stackoverflow.com/questions/61254372/my-react-component-is-rendering-twice-because-of-strict-mode
 root.render(
-  <React.StrictMode>
-    <UserInfoProvider> 
-      <ToastProvider>
-        <App />
-      </ToastProvider>
-    </UserInfoProvider>
-  </React.StrictMode>
+  <UserInfoProvider>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </UserInfoProvider>
 );

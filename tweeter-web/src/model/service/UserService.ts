@@ -74,6 +74,7 @@ export class UserService {
     // TODO: Replace with the result of calling the server
     // Pause so we can see the logging out message. Delete when the call to the server is implemented.
     // await new Promise((res) => setTimeout(res, 1000));
+    console.log(authToken);
     const server = new ServerFacade();
     await server.logout(new TweeterRequest("", authToken));
   }
