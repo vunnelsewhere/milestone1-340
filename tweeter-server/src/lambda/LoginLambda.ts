@@ -1,4 +1,4 @@
-import {AuthenticateResponse, LoginRequest} from "tweeter-shared" // go to index.ts in shared, update export, npm run build there
+import { AuthenticateResponse, LoginRequest } from "tweeter-shared"; // go to index.ts in shared, update export, npm run build there
 
 import { UserService } from "../model/service/UserService";
 

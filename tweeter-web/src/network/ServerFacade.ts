@@ -22,7 +22,6 @@ import {
   PostStatusRequest,
 } from "tweeter-shared";
 
-
 export class ServerFacade {
   private SERVER_URL =
     "https://cbcwdfulah.execute-api.us-east-2.amazonaws.com/dev"; // API Gateway -> Stages (UPDATED!!)
@@ -35,23 +34,25 @@ export class ServerFacade {
     console.log(request);
     const response: JSON =
       await this.clientCommunicator.doPost<RegisterRequest>(request, endpoint);
-
+    console.log(response);
     return AuthenticateResponse.fromJson(response);
   }
 
   // Login
   async login(request: LoginRequest): Promise<AuthenticateResponse> {
     const endpoint = "/login";
+    console.log(request);
     const response: JSON = await this.clientCommunicator.doPost<LoginRequest>(
       request,
       endpoint
     );
-
+    console.log(response);
     return AuthenticateResponse.fromJson(response);
   }
 
   // Logout
   async logout(request: TweeterRequest): Promise<TweeterResponse> {
+    console.log(request);
     const endpoint = "/logout";
     const response: JSON = await this.clientCommunicator.doPost<TweeterRequest>(
       request,
@@ -63,6 +64,7 @@ export class ServerFacade {
 
   // Follow
   async follow(request: FollowRequest): Promise<FollowResponse> {
+    console.log(request);
     const endpoint = "/follow";
     const response: JSON = await this.clientCommunicator.doPost<FollowRequest>(
       request,
@@ -74,6 +76,7 @@ export class ServerFacade {
 
   // Unfollow
   async unfollow(request: FollowRequest): Promise<FollowResponse> {
+    console.log(request);
     const endpoint = "/unfollow";
     const response: JSON = await this.clientCommunicator.doPost<FollowRequest>(
       request,
@@ -88,6 +91,7 @@ export class ServerFacade {
     request: FollowStatusRequest
   ): Promise<FollowStatusResponse> {
     const endpoint = "/getfollowstatus";
+    console.log(request);
     const response: JSON =
       await this.clientCommunicator.doPost<FollowStatusRequest>(
         request,
@@ -99,6 +103,7 @@ export class ServerFacade {
 
   // get User
   async getUser(request: TweeterRequest): Promise<GetUserResponse> {
+    console.log(request);
     const endpoint = "/getuser";
     const response: JSON = await this.clientCommunicator.doPost<TweeterRequest>(
       request,
@@ -112,6 +117,7 @@ export class ServerFacade {
   async getFollowCount(
     request: GetFollowCountRequest
   ): Promise<GetFollowCountResponse> {
+    console.log(request);
     const endpoint = "/getfollowcount";
     const response: JSON =
       await this.clientCommunicator.doPost<GetFollowCountRequest>(
@@ -124,6 +130,7 @@ export class ServerFacade {
 
   // post status
   async postStatus(request: PostStatusRequest): Promise<TweeterResponse> {
+    console.log(request);
     const endpoint = "/poststatus";
     const response: JSON =
       await this.clientCommunicator.doPost<PostStatusRequest>(
@@ -138,6 +145,7 @@ export class ServerFacade {
   async loadMoreStoryItems(
     request: LoadMoreItemsRequest
   ): Promise<LoadMoreItemsResponse> {
+    console.log(request);
     const endpoint = "/loadstory";
     const repsonse: JSON =
       await this.clientCommunicator.doPost<LoadMoreItemsRequest>(
@@ -152,6 +160,7 @@ export class ServerFacade {
   async loadMoreFeedItems(
     request: LoadMoreItemsRequest
   ): Promise<LoadMoreItemsResponse> {
+    console.log(request);
     const endpoint = "/loadfeed";
     const repsonse: JSON =
       await this.clientCommunicator.doPost<LoadMoreItemsRequest>(
@@ -164,6 +173,7 @@ export class ServerFacade {
 
   // load user
   async loadMoreUsers(request: LoadMoreUsersRequest) {
+    console.log(request);
     const endpoint = "/loadusers";
     const response: JSON =
       await this.clientCommunicator.doPost<LoadMoreUsersRequest>(

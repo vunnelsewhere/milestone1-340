@@ -35,7 +35,7 @@ import { handler as getFollowHandler } from "./lambda/GetFollowCountLambda";
 import { handler as loadMoreUsersHandler } from "./lambda/LoadMoreUsersLambda";
 
 async function login() {
-  let req = new LoginRequest("a", "a");
+  let req = new LoginRequest("venusccy", "1234");
   console.log(JSON.stringify(req));
   let response = JSON.stringify(await loginHandler(req));
   console.log(response);
@@ -45,7 +45,7 @@ async function login() {
 }
 
 async function register() {
-  let req = new RegisterRequest("a", "a", "a", "a", "image");
+  let req = new RegisterRequest("Venus", "Chan", "venusccy", "1234", "image"); // finally worked!! 2pm already
   console.log(JSON.stringify(req));
   let response = JSON.stringify(await registerHandler(req));
   console.log(response);
